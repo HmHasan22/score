@@ -5,7 +5,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Create Result</h2>
+                        <h2>Create League</h2>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('create-league') }}" method="POST">

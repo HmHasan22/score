@@ -5,21 +5,22 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Create Result</h2>
+                        <h2>Update League</h2>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('create-league') }}" method="POST">
+                        <form action="{{ route('update-league') }}" method="POST">
                             @csrf
                             <div class="input-group mb-3">
+                                <input type="hidden" name="id" value="{{ $data->id }}">
                                 <input  type="text" class="form-control @error('name') is-invalid
-                                @enderror" name="name" placeholder="League Name">
+                                @enderror" name="name" placeholder="League Name" value="{{ $data->name }}">
                                 <div class="invalid-feedback">
                                     @error('name')
                                         {{ $message }}
                                     @enderror
                                   </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Update</button>
                         </form>
                     </div>
                 </div>
