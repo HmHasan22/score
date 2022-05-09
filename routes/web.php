@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HasilController;
+use App\Http\Controllers\ResultController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
@@ -34,10 +34,10 @@ Route::prefix('league')->group(function () {
 });
 
 Route::prefix('result')->group(function () {
-    Route::get("/",[HasilController::class,'index']);
-    Route::get("/create",[HasilController::class,'create'])->name('hasil.create');
-    Route::post("/create",[HasilController::class,'store'])->name('hasil.add');
-    Route::get("/edit/{id}",[HasilController::class,'edit'])->name('hasil.edit');
-    Route::post("/update",[HasilController::class,'update'])->name('hasil.update');
-    Route::get("/delete/{id}",[HasilController::class,'destroy'])->name('hasil.delete');
+    Route::get("/",[ResultController::class,'index']);
+    Route::get("/create",[ResultController::class,'create'])->name('result.create');
+    Route::post("/create",[ResultController::class,'store'])->name('result.store');
+    Route::get("/edit/{id}",[ResultController::class,'edit'])->name('result.edit');
+    Route::post("/update",[ResultController::class,'update'])->name('result.update');
+    Route::get("/delete/{id}",[ResultController::class,'destroy'])->name('result.delete');
 });

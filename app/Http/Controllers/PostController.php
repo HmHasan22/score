@@ -33,7 +33,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $xmlString = file_get_contents(public_path('sitemap.xml'));
+        $xmlString = file_get_contents('http://oddsfeed.new.188games.com/OddsFeed/188BET/default/V1.0/GetOdds.aspx?language=ALL&event=ALL&market=ALL&sportsid=1&bettype=8_2');
         $xmlObject = simplexml_load_string($xmlString);
         $json = json_encode($xmlObject);
         $phpArray = json_decode($json, true);

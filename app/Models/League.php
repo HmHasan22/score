@@ -10,4 +10,9 @@ class League extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function results()
+    {
+        return $this->hasMany(Result::class);
+    }
 }
