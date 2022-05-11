@@ -63,8 +63,6 @@ class ResultController extends Controller
         $data->date = $request->date;
         $data->save();
         return redirect('/result')->with("success", 'Result Create Successfully');
-
-
     }
 
     /**
@@ -86,7 +84,9 @@ class ResultController extends Controller
      */
     public function edit($id)
     {
-        return view('result.edit');
+        $data = Result::with('league')->where('id',$id)->get();
+        $league = League::all();
+        return view('result.edit',compact('data','league'));
     }
 
     /**
@@ -96,9 +96,32 @@ class ResultController extends Controller
      * @param  \App\Models\Result  $result
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Result $result)
+    public function update(Request $request)
     {
-        //
+        $this->validate($request, [
+            'league_id'=>'required',
+            'home_team' => 'required',
+            'away_team' => 'required',
+            'result_one' => 'required',
+            'result_two' => 'required',
+            'date' => 'required',
+        ], [
+            'league_id.required' => 'This field is required',
+            'home_team.required' => 'This field is required',
+            'away_team.required' => 'This field is required',
+            'result_one.required' => 'This field is required',
+            'result_two.required' => 'This field is required',
+            'date.required' => 'This field is required',
+        ]);
+        $data = Result::find($request->id);
+        $data->league_id = $request->league_id;
+        $data->home_team = $request->home_team;
+        $data->away_team = $request->away_team;
+        $data->result_one = $request->result_one;
+        $data->result_two = $request->result_two;
+        $data->date = $request->date;
+        $data->save();
+        return redirect('/result')->with("success", 'Result Update Successfully');
     }
 
     /**

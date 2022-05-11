@@ -20,11 +20,11 @@ use App\Http\Controllers\LeagueController;
 // Route::get("/",[PostController::class,'index']);
 Route::get("/insert-data",[PostController::class,'create']);
 
-Auth::routes();
+Auth::routes(['register'=>false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::prefix('league')->group(function () {
+Route::group(['prefix'=>'league','middleware'=>'auth'],function () {
     Route::get("/",[LeagueController::class,'index']);
     Route::get("/create",[LeagueController::class,'create'])->name('add-league');
     Route::post("/create",[LeagueController::class,'store'])->name('create-league');
@@ -33,7 +33,7 @@ Route::prefix('league')->group(function () {
     Route::get("/delete/{id}",[LeagueController::class,'destroy'])->name('delete-league');
 });
 
-Route::prefix('result')->group(function () {
+Route::group(['prefix'=>'result','middleware'=>'auth'],function () {
     Route::get("/",[ResultController::class,'index']);
     Route::get("/create",[ResultController::class,'create'])->name('result.create');
     Route::post("/create",[ResultController::class,'store'])->name('result.store');

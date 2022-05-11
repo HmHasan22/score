@@ -1,39 +1,17 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <th>SL</th>
-                            <th>League</th>
-                            <th>Home Team</th>
-                            <th>Away Team</th>
-                            <th>Result One</th>
-                            <th>Result Two</th>
-                            <th>Action</th>
-                        </thead>
-                        <tbody>
-                           <tr>
-                            <td>01</td>
-                            <td>Indian Premiur League</td>
-                            <td>Barcalona</td>
-                            <td>Real Madrid</td>
-                            <td>Soon</td>
-                            <td>Soon</td>
-                            <td>
-                                <button type="button" class="btn btn-success">Edit</button>
-                                <button type="button" class="btn btn-danger">Button</button>
-                            </td>
-                           </tr>
-                        </tbody>
-                    </table>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
+                <div class="card py-5">
+                    <div class="text-center display-4">Welcome to Score API</div>
+                    <div class="row m-auto mt-4">
+                        <div class="col-6">
+                            <a href="{{ route('login') }}" class="btn text-center btn-primary">Login</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection
