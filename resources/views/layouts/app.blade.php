@@ -50,6 +50,12 @@
                                 </li>
                             @endif
                         @else
+                            <li class="nav-item">
+                                <a href="/result" class="nav-link">Result</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/league" class="nav-link">League</a>
+                            </li>
                             <li class="nav-item ">
                                 <div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -59,6 +65,7 @@
                                     </form>
                                 </div>
                             </li>
+
                         @endguest
                     </ul>
                 </div>
