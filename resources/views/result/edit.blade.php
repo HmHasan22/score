@@ -10,11 +10,12 @@
                     <div class="card-body">
                         <form action="{{ route('result.update') }}" method="POST">
                             @csrf
-                            <input type="hidden" name="id" value="{{ $data[0]->league->id }}">
+                            <input type="hidden" name="id" value="{{ $data[0]->id }}">
                             <div class="mb-3">
                                 <select name="league_id" class="form-control">
                                     @foreach ($league as $item)
-                                        <option value="{{ $item->id }}"
+                                        <option
+                                            value={{ $data[0]->league->id === $item->id ? $data[0]->league->id : $item->id }}
                                             {{ $data[0]->league->id === $item->id ? 'selected' : '' }}>{{ $item->name }}
                                         </option>
                                     @endforeach

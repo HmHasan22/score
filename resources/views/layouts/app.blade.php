@@ -51,15 +51,14 @@
                             @endif
                         @else
                             <li class="nav-item">
-                                <a href="/result" class="nav-link">Result</a>
+                                <a href="{{ route('result.index') }}" class="nav-link">Result</a>
                             </li>
                             <li class="nav-item">
-                                <a href="/league" class="nav-link">League</a>
+                                <a href="{{ route('league.index') }}" class="nav-link">League</a>
                             </li>
                             <li class="nav-item ">
                                 <div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
-
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Logout</button>
                                     </form>
