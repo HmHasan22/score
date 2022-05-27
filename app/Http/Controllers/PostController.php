@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PostResource;
 use Exception;
 use App\Models\Post;
+use App\Models\Qualification;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -18,14 +19,14 @@ class PostController extends Controller
     {
         if ($request->is('api/*')) {
             $data = Post::whereIn(
-                'competition',['UEFA Champions League','FIFA World Cup 2022 (In Qatar) - 15 Minute Goals','AFC Champions League','English Premier League','Spain Primera Division','Italy Serie A','Germany Bundesliga 1'],
+                'competition',Qualification::pluck("qualification"),
             )->get();
             return response()->json([
                 'status' => true,
                 'data' => PostResource::collection($data),
             ], 200);
         } else {
-            return "hello";
+            return "something went wrong";
         }
     }
 

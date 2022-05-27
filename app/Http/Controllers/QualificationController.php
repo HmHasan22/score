@@ -10,10 +10,10 @@ class QualificationController extends Controller
     public function store(Request $request)
     {
         Qualification::truncate();
-        Qualification::create([
-            'qualification' => json_encode($request->qualifications),
-        ]);
-
+        foreach($request->qualifications as $item)
+            Qualification::create([
+                'qualification' =>$item ,
+            ]);
         return redirect()->back()->with("success","API SUCCESSFULLY UPDATED");
     }
 }
