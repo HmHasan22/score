@@ -12,7 +12,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -56,6 +59,9 @@
                             <li class="nav-item">
                                 <a href="{{ route('league.index') }}" class="nav-link">League</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('category') }}" class="nav-link">Category</a>
+                            </li>
                             <li class="nav-item ">
                                 <div>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
@@ -64,7 +70,6 @@
                                     </form>
                                 </div>
                             </li>
-
                         @endguest
                     </ul>
                 </div>
@@ -75,6 +80,7 @@
             @yield('content')
         </main>
     </div>
+    @yield('scripts');
 </body>
 
 </html>

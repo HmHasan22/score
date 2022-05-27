@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LeagueController;
+use App\Http\Controllers\QualificationController;
+use App\Models\Qualification;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,6 +33,7 @@ Route::group(['prefix'=>'league','middleware'=>'auth'],function () {
     Route::get("/edit/{id}",[LeagueController::class,'edit'])->name('edit-league');
     Route::post("/update",[LeagueController::class,'update'])->name('update-league');
     Route::get("/delete/{id}",[LeagueController::class,'destroy'])->name('delete-league');
+    Route::get("category",[PostController::class,'category'])->name('category');
 });
 
 Route::group(['prefix'=>'result','middleware'=>'auth'],function () {
@@ -41,3 +44,6 @@ Route::group(['prefix'=>'result','middleware'=>'auth'],function () {
     Route::post("/update",[ResultController::class,'update'])->name('result.update');
     Route::get("/delete/{id}",[ResultController::class,'destroy'])->name('result.delete');
 });
+
+Route::post("qualification",[QualificationController::class,'store'])->name('qualification')->
+middleware('auth');

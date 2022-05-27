@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use Exception;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -11,19 +12,26 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return string
      */
     public function index(Request $request)
     {
         if ($request->is('api/*')) {
-            $data = Post::all();
+            $data = Post::whereIn(
+                'competition',['UEFA Champions League','FIFA World Cup 2022 (In Qatar) - 15 Minute Goals','AFC Champions League','English Premier League','Spain Primera Division','Italy Serie A','Germany Bundesliga 1'],
+            )->get();
             return response()->json([
                 'status' => true,
-                'data' => $data,
+                'data' => PostResource::collection($data),
             ], 200);
         } else {
             return "hello";
         }
+    }
+
+    public function category(){
+        $data = Post::pluck('competition')->unique();
+        return view("score.score",compact('data'));
     }
 
     /**
@@ -33,38 +41,38 @@ class PostController extends Controller
      */
     public function create()
     {
-        $xmlString = file_get_contents('http://oddsfeed.new.188games.com/OddsFeed/188BET/default/V1.0/GetOdds.aspx?language=ALL&event=ALL&market=ALL&sportsid=1&bettype=8_2');
-        $xmlObject = simplexml_load_string($xmlString);
-        $json = json_encode($xmlObject);
-        $phpArray = json_decode($json, true);
-        try {
-            foreach ($phpArray['odds']['FixtureEvent'] as $value) {
-                Post::create([
-                    'competition' => $value['@attributes']['competition'],
-                    'competitionCht' => $value['@attributes']['competitionCht'],
-                    'competitionChs' => $value['@attributes']['competitionChs'],
-                    'competitionKor' => $value['@attributes']['competitionKor'],
-                    'competitionVie' => $value['@attributes']['competitionVie'],
-                    'hometeam' => $value['@attributes']['hometeam'],
-                    'hometeamCht' => $value['@attributes']['hometeamCht'],
-                    'hometeamChs' => $value['@attributes']['hometeamChs'],
-                    'hometeamKor' => $value['@attributes']['hometeamKor'],
-                    'hometeamVie' => $value['@attributes']['hometeamVie'],
-                    'awayteam' => $value['@attributes']['awayteam'],
-                    'awayteamCht' => $value['@attributes']['awayteamCht'],
-                    'awayteamKor' => $value['@attributes']['awayteamKor'],
-                    'awayteamChs' => $value['@attributes']['awayteamChs'],
-                    'awayteamVie' => $value['@attributes']['awayteamVie'],
-                    'date' => $value['@attributes']['date'],
-                    'time' => $value['@attributes']['time'],
-                    'title' => $value['marketline']['@attributes']['title'],
-                    'titlelong' => $value['marketline']['@attributes']['titlelong'],
-                    'section' => json_encode($value['marketline']['selection']),
-                ]);
-            }
-        } catch (Exception $e) {
-            dd($e);
-        }
+        // $xmlString = file_get_contents('http://oddsfeed.new.188games.com/OddsFeed/188BET/default/V1.0/GetOdds.aspx?language=ALL&event=ALL&market=ALL&sportsid=1&bettype=8_2');
+        // $xmlObject = simplexml_load_string($xmlString);
+        // $json = json_encode($xmlObject);
+        // $phpArray = json_decode($json, true);
+        // try {
+        //     foreach ($phpArray['odds']['FixtureEvent'] as $value) {
+        //         Post::create([
+        //             'competition' => $value['@attributes']['competition'],
+        //             'competitionCht' => $value['@attributes']['competitionCht'],
+        //             'competitionChs' => $value['@attributes']['competitionChs'],
+        //             'competitionKor' => $value['@attributes']['competitionKor'],
+        //             'competitionVie' => $value['@attributes']['competitionVie'],
+        //             'hometeam' => $value['@attributes']['hometeam'],
+        //             'hometeamCht' => $value['@attributes']['hometeamCht'],
+        //             'hometeamChs' => $value['@attributes']['hometeamChs'],
+        //             'hometeamKor' => $value['@attributes']['hometeamKor'],
+        //             'hometeamVie' => $value['@attributes']['hometeamVie'],
+        //             'awayteam' => $value['@attributes']['awayteam'],
+        //             'awayteamCht' => $value['@attributes']['awayteamCht'],
+        //             'awayteamKor' => $value['@attributes']['awayteamKor'],
+        //             'awayteamChs' => $value['@attributes']['awayteamChs'],
+        //             'awayteamVie' => $value['@attributes']['awayteamVie'],
+        //             'date' => $value['@attributes']['date'],
+        //             'time' => $value['@attributes']['time'],
+        //             'title' => $value['marketline']['@attributes']['title'],
+        //             'titlelong' => $value['marketline']['@attributes']['titlelong'],
+        //             'section' => json_encode($value['marketline']['selection']),
+        //         ]);
+        //     }
+        // } catch (Exception $e) {
+        //     dd($e);
+        // }
     }
 
     /**
