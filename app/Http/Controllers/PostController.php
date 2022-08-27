@@ -34,7 +34,8 @@ class PostController extends Controller
     public function category()
     {
         $data = Post::pluck('competition')->unique();
-        return view("score.score", compact('data'));
+        $qualification = Qualification::pluck('qualification');
+        return view("score.score", compact('data', 'qualification'));
     }
 
     /**
