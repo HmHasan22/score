@@ -20,7 +20,7 @@ class Kernel extends ConsoleKernel
         // $schedule->call(function () {
         // })->everyFiveMinutes();
 
-        $schedule->command('insert')->everyFiveMinutes();
+        $schedule->command('command:insert')->everyFiveMinutes();
     }
 
     /**
