@@ -1,7 +1,8 @@
 window._ = require('lodash');
-
+import * as bootstrap from 'bootstrap'
 try {
     require('bootstrap');
+    window.bootstrap = bootstrap;
 } catch (e) {}
 
 /**
@@ -13,7 +14,7 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
+export { bootstrap }
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting

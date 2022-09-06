@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Post;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use PHPUnit\Exception;
 
 class InsertData extends Command {
@@ -36,7 +37,9 @@ class InsertData extends Command {
 	 * @return int
 	 */
 	public function handle() {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 		Post::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 		$xmlString = file_get_contents('http://oddsfeed.new.188games.com/OddsFeed/188BET/default/V1.0/GetOdds.aspx?language=ALL&event=ALL&market=ALL&sportsid=1&bettype=8_2');
 		$xmlObject = simplexml_load_string($xmlString);
 		$json = json_encode($xmlObject);

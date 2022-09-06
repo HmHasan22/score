@@ -5,18 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model {
-	use HasFactory;
+class Post extends Model
+{
+    use HasFactory;
 
-	protected $guarded = [];
+    protected $guarded = [];
 
-	protected $hidden = [
-		'created_at',
-		'updated_at',
-	];
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
-	public function getSectionAttribute($value) {
-		return json_decode($value);
-	}
+    public function getSectionAttribute($value)
+    {
+        return json_decode($value);
+    }
+
+    public function score()
+    {
+        return $this->hasOne(Score::class);
+    }
 
 }

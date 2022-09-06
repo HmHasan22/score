@@ -43,13 +43,15 @@
                         @if (count($data) > 0)
                             <table class="table">
                                 <thead>
-                                    <th>SL</th>
-                                    <th>League</th>
-                                    <th>Home Team</th>
-                                    <th>Away Team</th>
-                                    <th>Result One</th>
-                                    <th>Result Two</th>
-                                    <th>Action</th>
+                                    <tr>
+                                        <th>SL</th>
+                                        <th>League</th>
+                                        <th>Home Team</th>
+                                        <th>Away Team</th>
+                                        <th>Result One</th>
+                                        <th>Result Two</th>
+                                        <th>Action</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $value)

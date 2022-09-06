@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PostResource;
+use App\Models\Score;
 use Exception;
 use App\Models\Post;
 use App\Models\Qualification;
@@ -20,8 +21,7 @@ class PostController extends Controller
         if ($request->is('api/*')) {
             $data = Post::whereIn(
                 'competition', Qualification::pluck("qualification"),
-            )->get();
-//            $test = $data->groupBy("competition");
+            )->with('score')->get();
             return response()->json([
                 'status' => true,
                 'data' => PostResource::collection($data)->collection->groupBy("competition"),
